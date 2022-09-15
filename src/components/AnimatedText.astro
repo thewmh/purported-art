@@ -1,0 +1,71 @@
+---
+export interface Props {
+    text: string;
+}
+const { text }  = Astro.props;
+---
+
+<h1 id="animated-text"><span>{text}</span></h1>
+<style>
+    :root {
+        --headline-color: hsl(0, 0%, 17%);
+        --headline-color-hover: hsl(0, 0%, 36%);
+    }
+
+    h1 {
+        color: var(--headline-color);
+        position: relative;
+        overflow: hidden;
+        display: block;
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1;
+    }
+
+    h1:hover {
+        color: var(--headline-color-hover);
+        cursor: not-allowed;
+    }
+
+    h1:hover:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 25%;
+        background-color: var(--color-bg);
+    }
+
+    span:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0%;
+        background-color: var(--color-bg);
+        animation: pseudo 5s ease-in-out forwards;
+        opacity: 1;
+    }
+
+    h1:nth-of-type(2) span:after{
+        animation-delay: 3s;
+    }
+
+    span {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+    }
+
+    @keyframes pseudo {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+</style>

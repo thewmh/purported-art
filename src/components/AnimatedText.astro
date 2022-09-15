@@ -34,6 +34,10 @@ const { text }  = Astro.props;
         overflow: hidden;
         animation: word_up 7s infinite;
     }
+
+    span:first-of-type, span:last-of-type {
+        color: hsl(0, 0%, 33%);
+    }
     @keyframes word_up{
         10%{
             transform: translateY(-112%);

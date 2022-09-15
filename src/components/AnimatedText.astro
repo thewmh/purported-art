@@ -10,6 +10,7 @@ const { text }  = Astro.props;
     :root {
         --headline-color: hsl(0, 0%, 17%);
         --headline-color-hover: hsl(0, 0%, 36%);
+        --default-transition: .3s ease-in-out;
     }
 
     h1 {
@@ -20,14 +21,10 @@ const { text }  = Astro.props;
         text-transform: uppercase;
         margin: 0;
         line-height: 1;
+        transition: var(--default-transition);
     }
-
-    h1:hover {
-        color: var(--headline-color-hover);
-        cursor: not-allowed;
-    }
-
-    h1:hover:after {
+    
+    h1:after {
         content: "";
         position: absolute;
         left: 0;
@@ -36,6 +33,15 @@ const { text }  = Astro.props;
         width: 100%;
         height: 25%;
         background-color: var(--color-bg);
+        opacity: 0;
+    }
+
+    h1:hover {
+        color: var(--headline-color-hover);
+    }
+
+    h1:hover:after {
+        opacity: 1;
     }
 
     span:after {

@@ -1,12 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AnimatedText from '../components/AnimatedText.astro';
+const text = [
+	'purported',
+	'might be',
+	'alleged',
+	'is it',
+	'not really',
+	'purported'
+]
 ---
 
 <Layout title="This Might Be Art">
 	<main>
-		<AnimatedText text="purported" />
-		<AnimatedText text="art" />
+		<div class="wrapper">
+			<AnimatedText text={text} />
+			<h1>ART</h1>
+			<p>coming soon</p>
+		</div>
 	</main>
 </Layout>
 
@@ -17,6 +28,12 @@ import AnimatedText from '../components/AnimatedText.astro';
 
 	h1 {
 		margin: 0 auto;
+		color: var(--headline-color)
+	}
+
+	p {
+		color: hsl(0, 0%, 20%);
+		text-transform: uppercase;
 	}
 
 	main {
@@ -24,6 +41,13 @@ import AnimatedText from '../components/AnimatedText.astro';
 		padding: 1em;
 		max-width: 60ch;
 		text-align: center;
+	}
+	
+	main * {
+		transition: .3s ease-in-out;
+	}
+	main:hover * {
+		color: black;
 	}
 
 	.text-gradient {

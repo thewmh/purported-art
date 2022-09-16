@@ -32,38 +32,41 @@ const { text }  = Astro.props;
         position: relative;
         overflow: hidden;
         animation: word_up 7s infinite;
+        transition-timing-function: ease-in-out;
+        animation-delay: 2s;
     }
 
     span:first-of-type, span:last-of-type {
         color: hsl(0, 0%, 0%);
     }
+
     @keyframes word_up{
         10%{
-            transform: translateY(-112%);
+            transform: translateY(-100%);
         }
         20%{
             transform: translateY(-100%);
         }
         30%{
-            transform: translateY(-212%);
+            transform: translateY(-200%);
         }
         40%{
             transform: translateY(-200%);
         }
         50%{
-            transform: translateY(-312%);
+            transform: translateY(-300%);
         }
         60%{
             transform: translateY(-300%);
         }
         70%{
-            transform: translateY(-412%);
+            transform: translateY(-400%);
         }
         80%{
             transform: translateY(-400%);
         }
         90%{
-            transform: translateY(-512%);
+            transform: translateY(-500%);
         }
         100%{
             transform: translateY(-500%);

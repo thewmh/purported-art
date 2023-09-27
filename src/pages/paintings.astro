@@ -5,29 +5,77 @@ const paintings = [
 	{
 		title: "Mattel",
 		year: 2022,
-		color: '#e0218a',
+		color: '#ff008c',
 	},
 	{
 		title: "Kermit",
 		year: 2022,
-		color: '#74bd6a',
+		color: '#50eb3b',
 	},
 	{
 		title: "TS0323",
 		year: 2023,
-		color: '#FF3131',
+		color: '#ff2700',
+	},
+	{
+		title: "Water Floats",
+		year: 2019,
+		color: '#0046ff',
+	},
+	{
+		title: "Water on Earth in Space",
+		year: 2019,
+		color: '#db00ff',
 	},
 ]
+
+const setText = (text: string) => {
+	const oldText = '';
+	const newText = text;
+	console.log(text)
+}
 ---
 
 <Layout title="This Might Be Art">
-	<main>
-		<div class="wrapper">
-			<!-- <h1>PURPORTED ART</h1> -->
+	<div class="h-12 flex overflow-hidden gap-1 relative group items-center">
+		<ul class="flex shrink-0 justify-around animate-scroll min-w-full uppercase font-semibold cursor-not-allowed gap-1 group-hover:[animation-play-state:paused]">
+			<li data-title>purported art</li>
+		</ul>
+		<ul class="flex shrink-0 justify-around animate-scroll min-w-full uppercase font-semibold cursor-not-allowed gap-1 group-hover:[animation-play-state:paused]">
+			<li data-title>purported art</li>
+		</ul>
+	</div>
+	<main class="w-full">
+		<div class="wrapper container grid md:grid-cols-3 grid-cols-1 mx-auto gap-6" data-painting-container>
+
+			<script>
+				const title = 'puported art';
+
+				function setText (event) {
+					const newText = event.target.querySelector('h2').innerText;
+					document.querySelectorAll("[data-title]").forEach(el => el.innerText = newText)	
+				}
+
+				function resetText (event) {
+					event.stopPropagation();
+
+					if ((event.target.parentNode.getAttribute('data-painting-container') !== null || event.target.tagName === 'MAIN') && event.toElement.getAttribute('data-painting-container') === null) {
+							document.querySelectorAll("[data-title]").forEach(el => el.innerText = title);
+					}
+				} 
+
+				document.querySelectorAll("[data-trigger='painting']").forEach(el => el.addEventListener('mouseenter', setText));
+				document.querySelectorAll("[data-trigger='painting']").forEach(el => el.addEventListener('mouseleave', resetText, false));
+				Array.from(document.getElementsByTagName("main")).forEach(el => el.addEventListener('mouseover', resetText, false));
+			</script>
+
 			{paintings.map(painting => 
-				<div style={`background-color: ${painting.color}; height: 100px; display: flex; justify-content: center; align-items: center; flex-direction: column;`}>
-					<h2>{painting.title}</h2>
-					<h3>{painting.year}</h3>
+				<div style={`background-color: ${painting.color};`} class="w-full h-36 flex flex-col justify-center items-center relative overflow-hidden" data-trigger="painting">
+					<img src={`https://source.unsplash.com/random/${painting.title}`} alt={painting.title} class="absolute" />
+					<div class="z-10 flex items-center justify-center flex-col absolute inset-0">
+						<h2>{painting.title}</h2>
+						<h3>{painting.year}</h3>
+					</div>
 				</div>
 			)}
 		</div>
@@ -37,24 +85,30 @@ const paintings = [
 <style lang="scss">
 
 	.wrapper {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		width: 80vw;
 
 		div {
-			width: calc(33% - 20px);
 
 			&:hover {
 				cursor: pointer;
-					* {
+					div {
 						opacity: 1;
+					}
+
+					img {
+						opacity: 0;
 					}
 			}
 
-			* {
-				color: #fafafa;
+			div {
 				opacity: 0;
+				transition-duration: 1s;
+				
+				* {
+					color: #fafafa;
+				}
+			}
+
+			img {
 				transition-duration: 1s;
 			}
 		}
@@ -78,6 +132,10 @@ const paintings = [
 	main {
 		margin: auto;
 		padding: 1em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: calc(100vh - 3rem);
 	}
 	
 	main * {

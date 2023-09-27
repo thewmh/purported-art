@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 
+import tailwind from "@astrojs/tailwind";
+
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://purported.art',
-    experimental: {
-        viewTransitions: true
-    }
+  site: 'https://purported.art',
+  integrations: [tailwind()]
 });

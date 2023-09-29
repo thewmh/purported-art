@@ -70,7 +70,12 @@ const setText = (text: string) => {
 			</script>
 
 			{paintings.map(painting => 
-				<div style={`background-color: ${painting.color};`} class="w-full h-36 flex flex-col justify-center items-center relative overflow-hidden" data-trigger="painting">
+				<div
+					style={`background-color: ${painting.color};`} class="w-full h-36 flex flex-col justify-center items-center relative overflow-hidden snipcart-add-item" data-trigger="painting"
+					data-item-id={painting.title.toLowerCase().split('').join('')}
+					data-item-price={painting.year}
+					data-item-name={painting.title}
+				>
 					<img src={`https://source.unsplash.com/random/${painting.title}`} alt={painting.title} class="absolute" />
 					<div class="z-10 flex items-center justify-center flex-col absolute inset-0">
 						<h2>{painting.title}</h2>

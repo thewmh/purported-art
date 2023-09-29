@@ -72,7 +72,7 @@ const setText = (text: string) => {
 			{paintings.map(painting => 
 				<div
 					style={`background-color: ${painting.color};`} class="w-full h-36 flex flex-col justify-center items-center relative overflow-hidden snipcart-add-item" data-trigger="painting"
-					data-item-id={painting.title.toLowerCase().split('').join('')}
+					data-item-id={painting.title.toLowerCase().split(' ').join('-')}
 					data-item-price={painting.year}
 					data-item-name={painting.title}
 				>
